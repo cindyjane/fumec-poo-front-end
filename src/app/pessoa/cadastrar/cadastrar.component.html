@@ -1,0 +1,57 @@
+<main>
+  <section class="mat-elevation-z1">
+    <header>
+      <h3>Cadastrar Pessoa</h3>
+    </header>
+
+    <form [formGroup]="form">
+      <mat-form-field>
+        <input matInput placeholder="Nome" formControlName="nome">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Telefone" formControlName="telefones">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Email" formControlName="email">
+      </mat-form-field>
+
+      <mat-radio-group formControlName="tipoPessoa">
+        <mat-radio-button *ngFor="let tipoPessoa of tipoPessoas" [value]="tipoPessoa">{{tipoPessoa}}</mat-radio-button>
+      </mat-radio-group>
+
+      <div class="custom-fields" *ngIf="tipoPessoa === 'Cliente'">
+        <mat-form-field>
+          <input matInput placeholder="CPF" formControlName="cpf">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Limite de Credito" formControlName="limiteCredito">
+        </mat-form-field>
+      </div>
+      <div class="custom-fields" *ngIf="tipoPessoa === 'Fornecedor'">
+        <mat-form-field>
+          <input matInput placeholder="CNPJ" formControlName="cnpj">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Nome Contato" formControlName="nomeContato">
+        </mat-form-field>
+      </div>
+      <div class="custom-fields" *ngIf="tipoPessoa === 'Vendedor'">
+        <mat-form-field>
+          <input matInput placeholder="CPF" formControlName="cpf">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Meta Mensal" formControlName="metaMensal">
+        </mat-form-field>
+      </div>
+
+      <div class="button">
+        <button mat-raised-button color="primary" (click)="onSalvar()" [disabled]="form.invalid">Salvar</button>
+      </div>
+    </form>
+  </section>
+</main>
