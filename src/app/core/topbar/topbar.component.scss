@@ -1,0 +1,21 @@
+mat-toolbar {
+  mat-toolbar-row {
+    button {
+      cursor: pointer;
+      min-width: unset;
+      line-height: unset;
+      padding: 0 0.375rem;
+      border: 1px solid transparent;
+      border-radius: 50%;
+      background-color: transparent;
+
+      mat-icon {
+        color: white;
+      }
+    }
+
+    h4 {
+      margin-left: 1rem;
+    }
+  }
+}

@@ -1,0 +1,52 @@
+<mat-sidenav-container [class.opened]="isOpen" (backdropClick)="close()">
+  <mat-sidenav>
+    <header>
+      <h3>SisCom</h3>
+      <label>Sistema de Controle Comercial</label>
+      <button mat-button (click)="close()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </header>
+
+    <mat-list>
+      <mat-list-item routerLinkActive="active" (click)="close()">
+        <button mat-button [routerLink]="'/pessoa'">
+          <mat-icon>person</mat-icon>
+          <span>Pessoas</span>
+        </button>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item routerLinkActive="active" (click)="close()">
+        <button mat-button [routerLink]="'/produto'">
+          <mat-icon>ballot</mat-icon>
+          <span>Produtos</span>
+        </button>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item routerLinkActive="active" (click)="close()">
+        <button mat-button [routerLink]="'/compra'">
+          <mat-icon>shopping_cart</mat-icon>
+          <span>Compras</span>
+        </button>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item routerLinkActive="active" (click)="close()">
+        <button mat-button [routerLink]="'/venda'">
+          <mat-icon>monetization_on</mat-icon>
+          <span>Vendas</span>
+        </button>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item routerLinkActive="active" (click)="close()">
+        <button mat-button [routerLink]="'/estatistica'">
+          <mat-icon>bar_chart</mat-icon>
+          <span>Estatisticas</span>
+        </button>
+      </mat-list-item>
+    </mat-list>
+
+    <footer>
+      Copyright &copy;. All rights reserved
+    </footer>
+  </mat-sidenav>
+</mat-sidenav-container>

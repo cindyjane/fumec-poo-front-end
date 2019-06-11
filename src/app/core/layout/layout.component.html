@@ -1,0 +1,10 @@
+<main>
+  <header>
+    <siscom-topbar [title]="title" (menuButtonClick)="onMenuButtonClicked()"></siscom-topbar>
+    <siscom-sidenav [(isOpen)]="isOpen"></siscom-sidenav>
+  </header>
+
+  <section>
+    <ng-content></ng-content>
+  </section>
+</main>
