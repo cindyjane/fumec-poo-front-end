@@ -1,6 +1,6 @@
 import { Pessoa } from "./pessoa.model";
 
 export interface Vendedor extends Pessoa {
-    cnpj: string;
+    cpf: string;
     metaMensal: number;
 }

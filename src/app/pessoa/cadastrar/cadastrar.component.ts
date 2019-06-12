@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { Pessoa } from '../shared/pessoa.model';
 import { PessoaRequest } from '../shared/pessoa-request.model';
 import { PessoaService } from '../pessoa.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'siscom-cadastrar',
@@ -15,7 +16,7 @@ export class CadastrarComponent implements OnInit {
   public tipoPessoas: TipoPessoa[];
   public tipoPessoa: TipoPessoa;
 
-  constructor(private formBuilder: FormBuilder, private pessoaService: PessoaService) {
+  constructor(private formBuilder: FormBuilder, private pessoaService: PessoaService, private router: Router) {
     this.tipoPessoas = Object.values(TipoPessoa);
   }
 
@@ -57,11 +58,21 @@ export class CadastrarComponent implements OnInit {
   }
 
   public onSalvar() {
+    let tipoPessoa: number;
+
+    if (this.form.get('tipoPessoa').value === TipoPessoa.Cliente) {
+      tipoPessoa = 0;
+    } else if (this.form.get('tipoPessoa').value === TipoPessoa.Fornecedor) {
+      tipoPessoa = 1;
+    } else {
+      tipoPessoa = 2;
+    }
+
     const pessoaRequest: PessoaRequest = {
       nome: this.form.get('nome').value,
       telefones: this.form.get('telefones').value,
       email: this.form.get('email').value,
-      tipoPessoa: this.form.get('tipoPessoa').value
+      tipoPessoa: tipoPessoa,
     } as PessoaRequest;
 
     if (this.tipoPessoa === TipoPessoa.Cliente) {
@@ -69,14 +80,15 @@ export class CadastrarComponent implements OnInit {
       pessoaRequest.cliLimiteCredito = this.form.get('limiteCredito').value;
     } else if (this.tipoPessoa === TipoPessoa.Fornecedor) {
       pessoaRequest.forCnpj = this.form.get('cnpj').value;
-      pessoaRequest.forNomeContato = this.form.get('forNomeContato').value;
+      pessoaRequest.forNomeContato = this.form.get('nomeContato').value;
     } else {
       pessoaRequest.venCpf = this.form.get('cpf').value;
       pessoaRequest.venMetaMensal = this.form.get('metaMensal').value;
     }
 
     this.pessoaService.cadastrar(pessoaRequest).subscribe(() => {
-      console.log('Cadastrado com sucesso');
+      alert('Cadastrado com sucesso');
+      this.router.navigateByUrl('pessoa/listar');
     });
   }
 }

@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, Validators, FormBuilder } from '@angular/forms';
+import { TipoPessoa } from '../shared/tipo-pessoa.enum';
+import { PessoaService } from '../pessoa.service';
+import { Pessoa } from '../shared/pessoa.model';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'siscom-listar',
@@ -8,23 +15,91 @@ import { Component, OnInit } from '@angular/core';
 export class ListarComponent implements OnInit {
   public dataSource: any;
   public displayedColumns: any;
+  public baseColumns: any;
+  public tipoPessoa: FormControl;
+  public nome: FormControl;
+  public cpfCnpj: FormControl;
+  public tipoPessoas: TipoPessoa[];
+  public tipoPessoaTypes: typeof TipoPessoa;
 
-  constructor() { }
+  constructor(private formBuilder: FormBuilder, private pessoaService: PessoaService, private router: Router) {
+    this.tipoPessoas = Object.values(TipoPessoa);
+    this.tipoPessoaTypes = TipoPessoa;
+  }
 
   ngOnInit() {
-    this.displayedColumns = ['position', 'name', 'weight', 'symbol'];
-    this.dataSource = [
-      { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
-      { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
-      { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
-      { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
-      { position: 5, name: 'Boron', weight: 10.811, symbol: 'B' },
-      { position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C' },
-      { position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N' },
-      { position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O' },
-      { position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F' },
-      { position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne' },
-    ];
+    this.dataSource = [];
+    this.displayedColumns = ['nome', 'telefones', 'email', 'dateCad', 'acoes'];
+    this.baseColumns = ['nome', 'telefones', 'email', 'dateCad', 'acoes'];
+
+    this.tipoPessoa = new FormControl(null, [Validators.required]);
+    this.nome = new FormControl(null, [Validators.required]);
+    this.cpfCnpj = new FormControl(null, [Validators.required]);
+    this.nome.disable();
+    this.tipoPessoa.valueChanges.subscribe(this.onTipoPessoaChange);
+    this.cpfCnpj.valueChanges.pipe(debounceTime(1000)).subscribe(this.onCpfCnpjChange);
+    this.nome.valueChanges.subscribe(this.onNomeChange);
+  }
+
+  public onTipoPessoaChange = (tipoPessoa: TipoPessoa) => {
+
+    this.displayedColumns = [...this.baseColumns.slice(0, this.baseColumns.length - 1)];
+
+    if (tipoPessoa === TipoPessoa.Cliente) {
+      this.displayedColumns.push('limiteCredito', 'cpf', 'acoes');
+    } else if (tipoPessoa === TipoPessoa.Fornecedor) {
+      this.displayedColumns.push('nomeContato', 'cnpj', 'acoes');
+    } else if (tipoPessoa === TipoPessoa.Vendedor) {
+      this.displayedColumns.push('metaMensal', 'cpf', 'acoes');
+    }
+
+
+    this.listarPessoas();
+
+    this.nome.enable();
+  }
+
+  public onNomeChange = () => {
+    this.listarPessoas();
+  }
+
+  public onCpfCnpjChange = (cpfCnpj: string) => {
+    this.tipoPessoa.reset(null, { emitEvent: false });
+    this.buscarPessoa(cpfCnpj);
+  }
+
+  public apagar = (pessoa: Pessoa) => {
+    this.pessoaService.excluir(pessoa.codigo).subscribe(() => {
+      alert(`${pessoa.nome} excluída com sucesso!`);
+      if (this.cpfCnpj.value) {
+        this.dataSource = [];
+        this.cpfCnpj.reset(null, { emitEvent: false });
+      } else {
+        this.listarPessoas();
+      }
+
+    }, (err: HttpErrorResponse) => {
+      console.log(err);
+      alert(err.error.message);
+    });
+  }
+
+  public listarPessoas = () => {
+    this.pessoaService.listar(this.nome.value, this.tipoPessoa.value).subscribe((results: Pessoa[]) => {
+      this.dataSource = results;
+    });
+  }
+
+  public buscarPessoa = (cpfCnpj: string) => {
+    this.pessoaService.buscar(cpfCnpj).subscribe((pessoa: Pessoa) => {
+      this.dataSource = [pessoa];
+    }, () => {
+      this.dataSource = [];
+    });
+  }
+
+  public onAddClick() {
+    this.router.navigateByUrl('pessoa/cadastrar');
   }
 
 }

@@ -18,12 +18,12 @@ export class PessoaService {
     return this.httpClient.post<void>(this.baseUrl + '/pessoa', pessoaRequest);
   }
 
-  public buscar(cpfCnpj: string, tipoPessoa: TipoPessoa): Observable<Pessoa> {
-    return this.httpClient.get<Pessoa>(`${this.baseUrl}/pessoa/${tipoPessoa}/${cpfCnpj}`);
+  public buscar(cpfCnpj: string): Observable<Pessoa> {
+    return this.httpClient.get<Pessoa>(`${this.baseUrl}/pessoa/${cpfCnpj}`);
   }
 
-  public listar(): Observable<Pessoa[]> {
-    return this.httpClient.get<Pessoa[]>(this.baseUrl + '/pessoa');
+  public listar(nome: string, tipoPessoa: TipoPessoa): Observable<Pessoa[]> {
+    return this.httpClient.get<Pessoa[]>(this.baseUrl + `/pessoa?query=${nome ? nome : ''}&tipoPessoa=${tipoPessoa.toUpperCase()}`);
   }
 
   public excluir(codigo: number): Observable<void> {

@@ -18,7 +18,8 @@
       </mat-form-field>
 
       <mat-radio-group formControlName="tipoPessoa">
-        <mat-radio-button *ngFor="let tipoPessoa of tipoPessoas" [value]="tipoPessoa">{{tipoPessoa}}</mat-radio-button>
+        <mat-radio-button *ngFor="let tipoPessoa of tipoPessoas; index as index" [value]="tipoPessoa">
+          {{tipoPessoa}}</mat-radio-button>
       </mat-radio-group>
 
       <div class="custom-fields" *ngIf="tipoPessoa === 'Cliente'">

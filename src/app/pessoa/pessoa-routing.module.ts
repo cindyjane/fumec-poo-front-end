@@ -6,7 +6,7 @@ import { ListarComponent } from './listar/listar.component';
 const routes: Routes = [
   { path: 'cadastrar', component: CadastrarComponent, data: { title: 'Cadastrar Pessoa' } },
   { path: 'listar', component: ListarComponent, data: { title: 'Listar Pessoa' } },
-  { path: '', redirectTo: 'cadastrar', pathMatch: 'full' },
+  { path: '', redirectTo: 'listar', pathMatch: 'full' },
 ];
 
 @NgModule({

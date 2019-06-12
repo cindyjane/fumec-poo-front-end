@@ -9,7 +9,7 @@ export interface PessoaRequest {
     forNomeContato: string;
     nome: string;
     telefones: string;
-    tipoPessoa: TipoPessoa;
+    tipoPessoa: number;
     venCpf: string;
     venMetaMensal: number;
 }

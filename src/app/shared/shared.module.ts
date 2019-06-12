@@ -4,6 +4,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 
@@ -19,7 +20,8 @@ import { MatTableModule } from '@angular/material/table';
     MatFormFieldModule,
     MatButtonModule,
     MatRadioModule,
-    MatTableModule
+    MatTableModule,
+    MatIconModule
   ]
 })
 export class SharedModule { }
