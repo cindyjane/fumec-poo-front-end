@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { TipoPessoa } from '../shared/tipo-pessoa.enum';
 import { PessoaService } from '../pessoa.service';
 import { Pessoa } from '../shared/pessoa.model';
@@ -22,7 +22,7 @@ export class ListarComponent implements OnInit {
   public tipoPessoas: TipoPessoa[];
   public tipoPessoaTypes: typeof TipoPessoa;
 
-  constructor(private formBuilder: FormBuilder, private pessoaService: PessoaService, private router: Router) {
+  constructor(private pessoaService: PessoaService, private router: Router) {
     this.tipoPessoas = Object.values(TipoPessoa);
     this.tipoPessoaTypes = TipoPessoa;
   }
@@ -101,5 +101,4 @@ export class ListarComponent implements OnInit {
   public onAddClick() {
     this.router.navigateByUrl('pessoa/cadastrar');
   }
-
 }
