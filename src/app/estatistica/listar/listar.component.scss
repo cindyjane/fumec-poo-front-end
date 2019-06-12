@@ -1,0 +1,44 @@
+section {
+  width: 80%;
+  margin: 1rem auto;
+  padding: 1rem 0;
+
+  table {
+    width: 100%;
+  }
+
+  div {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+
+    mat-form-field {
+      flex: 1 1 auto;
+
+      &:not(:last-child) {
+        margin-right: 1rem;
+      }
+    }
+  }
+
+  mat-radio-group {
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  mat-radio-button {
+    &:not(:first-child) {
+      margin-left: 1rem;
+    }
+  }
+
+  div.custom-fields {
+    margin-top: 1rem;
+  }
+
+  button[mat-mini-fab] {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+  }
+}
