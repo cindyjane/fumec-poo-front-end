@@ -42,7 +42,7 @@ export class ListarComponent implements OnInit {
   }
 
   public onTipoPessoaChange = (tipoPessoa: TipoPessoa) => {
-
+    this.cpfCnpj.reset(null, { emitEvent: false });
     this.displayedColumns = [...this.baseColumns.slice(0, this.baseColumns.length - 1)];
 
     if (tipoPessoa === TipoPessoa.Cliente) {
@@ -65,6 +65,7 @@ export class ListarComponent implements OnInit {
 
   public onCpfCnpjChange = (cpfCnpj: string) => {
     this.tipoPessoa.reset(null, { emitEvent: false });
+    this.nome.reset(null, { emitEvent: false });
     this.buscarPessoa(cpfCnpj);
   }
 
