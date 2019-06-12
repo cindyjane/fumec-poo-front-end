@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TipoPessoa } from '../shared/tipo-pessoa.enum';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { Pessoa } from '../shared/pessoa.model';
 import { PessoaRequest } from '../shared/pessoa-request.model';
 import { PessoaService } from '../pessoa.service';
 import { Router } from '@angular/router';
@@ -15,9 +14,11 @@ export class CadastrarComponent implements OnInit {
   public form: FormGroup;
   public tipoPessoas: TipoPessoa[];
   public tipoPessoa: TipoPessoa;
+  public tipoPessoaEnum: typeof TipoPessoa;
 
   constructor(private formBuilder: FormBuilder, private pessoaService: PessoaService, private router: Router) {
     this.tipoPessoas = Object.values(TipoPessoa);
+    this.tipoPessoaEnum = TipoPessoa;
   }
 
   ngOnInit() {
@@ -87,8 +88,8 @@ export class CadastrarComponent implements OnInit {
     }
 
     this.pessoaService.cadastrar(pessoaRequest).subscribe(() => {
-      alert('Cadastrado com sucesso');
+      alert('Pessoa cadastrada com sucesso');
       this.router.navigateByUrl('pessoa/listar');
-    });
+    }, () => alert('Erro ao cadastrar pessoa'));
   }
 }

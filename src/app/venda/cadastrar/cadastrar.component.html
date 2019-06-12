@@ -1,0 +1,52 @@
+<main>
+  <section class="mat-elevation-z1">
+    <header>
+      <h3>Cadastrar Venda</h3>
+    </header>
+
+    <form [formGroup]="form">
+      <mat-form-field>
+        <input matInput placeholder="Codigo Cliente"
+               formControlName="codigoCliente" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Codigo Vendedor"
+               formControlName="codigoVendedor" />
+      </mat-form-field>
+
+      <mat-radio-group formControlName="formaPagamento">
+        <mat-radio-button *ngFor="let formaPagamento of formaPagamentos"
+                          [value]="formaPagamento">
+          {{ formaPagamento }}</mat-radio-button>
+      </mat-radio-group>
+
+      <h4>Itens Venda</h4>
+      <label>Separados por virgula</label>
+
+      <div class="item-venda-fields">
+        <mat-form-field>
+          <input matInput placeholder="Codigo Produtos"
+                 formControlName="codigoProdutos" />
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Quantidade por produto"
+                 formControlName="quantidadeVendas" />
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Valor Total por produto (R$)"
+                 formControlName="valorVendas" />
+        </mat-form-field>
+      </div>
+
+      <div class="button">
+        <button mat-raised-button color="primary" (click)="onSalvar()"
+                [disabled]="form.invalid">
+          Salvar
+        </button>
+      </div>
+    </form>
+  </section>
+</main>
