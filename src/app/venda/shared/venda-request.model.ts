@@ -1,4 +1,3 @@
-import { FormaPagamento } from './forma-pagamento.enum';
 import { ItemVenda } from './item-venda.model';
 
 export interface VendaRequest {

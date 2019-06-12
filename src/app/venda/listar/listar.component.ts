@@ -79,6 +79,7 @@ export class ListarComponent implements OnInit {
     const dataInicioFormatted = dataInicio.format('YYYY-MM-DD');
     const dataTerminoFormatted = dataTermino.format('YYYY-MM-DD');
 
+
     this.vendaService.listar(nome, tipoPessoa, dataInicioFormatted, dataTerminoFormatted).subscribe((vendas: Venda[]) => {
       this.dataSource = vendas;
     });

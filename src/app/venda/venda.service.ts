@@ -21,8 +21,8 @@ export class VendaService {
   }
 
   public listar(nome: string, tipoPessoa: TipoPessoa, dataInicio: string, dataTermino: string): Observable<Venda[]> {
-    return this.httpClient.get<Venda[]>(this.baseUrl + `/venda?query=${nome ? nome : ''}
-                &tipoPessoa=${tipoPessoa.toUpperCase()}&de=${dataInicio}&para=${dataTermino}`);
+    const path = `/venda?query=${nome ? nome : ''}&tipoPessoa=${tipoPessoa.toUpperCase()}&de=${dataInicio}&para=${dataTermino}`;
+    return this.httpClient.get<Venda[]>(this.baseUrl + path);
   }
 
   public excluir(numVenda: number): Observable<void> {

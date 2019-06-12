@@ -1,0 +1,36 @@
+<main>
+  <section class="mat-elevation-z1">
+    <header>
+      <h3>Cadastrar Compra</h3>
+    </header>
+
+    <form [formGroup]="form">
+      <mat-form-field>
+        <input matInput placeholder="Codigo Fornecedor" formControlName="codigoFornecedor" />
+      </mat-form-field>
+
+      <h4>Itens Compra</h4>
+      <label>Separados por virgula</label>
+
+      <div class="item-compra-fields">
+        <mat-form-field>
+          <input matInput placeholder="Codigo Produtos" formControlName="codigoProdutos" />
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Quantidade por produto" formControlName="quantidadeCompras" />
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Valor Total por produto (R$)" formControlName="valorCompras" />
+        </mat-form-field>
+      </div>
+
+      <div class="button">
+        <button mat-raised-button color="primary" (click)="onSalvar()" [disabled]="form.invalid">
+          Salvar
+        </button>
+      </div>
+    </form>
+  </section>
+</main>
