@@ -1,3 +1,28 @@
-<p>
-  cadastrar works!
-</p>
+<main>
+  <section class="mat-elevation-z1">
+    <header>
+      <h3>Cadastrar Produto</h3>
+    </header>
+
+    <form [formGroup]="form">
+      <mat-form-field>
+        <input matInput placeholder="Nome" formControlName="nome">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Preco Unitario" formControlName="precoUnitario">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Estoque" formControlName="estoque">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Estoque Mínimo" formControlName="estoqueMinimo">
+      </mat-form-field>
+
+      <div class="button">
+        <button mat-raised-button color="primary" (click)="onSalvar()" [disabled]="form.invalid">Salvar</button>
+      </div>
+    </form>
+  </section>
+</main>

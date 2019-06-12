@@ -1,0 +1,47 @@
+main {
+  margin: 1rem;
+
+  section {
+    background-color: white;
+    width: 60%;
+    margin: auto;
+    padding: 1rem 0;
+
+    header {
+      margin-left: 1rem;
+
+      h3 {
+        font-family: Roboto;
+        font-size: 1.5em;
+      }
+    }
+
+    form {
+      margin: 1rem;
+
+      mat-form-field {
+        width: 100%;
+      }
+
+      mat-radio-group {
+        margin-top: 1rem;
+        display: block;
+      }
+
+      mat-radio-button {
+        &:not(:first-child) {
+          margin-left: 1rem;
+        }
+      }
+
+      div.custom-fields {
+        margin-top: 1rem;
+      }
+
+      div.button {
+        margin-top: 4rem;
+        text-align: right;
+      }
+    }
+  }
+}

@@ -22,7 +22,7 @@ export class ProdutoService {
   }
 
   public listar(nome: string, emFalta: boolean): Observable<Produto[]> {
-    return this.httpClient.get<Produto[]>(this.baseUrl + '/produto');
+    return this.httpClient.get<Produto[]>(this.baseUrl + `/produto?query=${nome ? nome : ''}&emFalta=${emFalta}`);
   }
 
   public excluir(codigo: number): Observable<void> {
